@@ -7,10 +7,14 @@ module Ralyxa
     module Directives
       class AudioPlayer
         class << self
-          def play(url, token, speech: nil, card: nil, offset_in_milliseconds: 0, expected_previous_token: nil, behaviour: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play::REPLACE_ALL, audio_player_class: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play, response_builder: Ralyxa::ResponseBuilder)
+          def play(url, token, session_attributes: nil, speech: nil, card: nil, offset_in_milliseconds: 0, expected_previous_token: nil, behaviour: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play::REPLACE_ALL, audio_player_class: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play, response_builder: Ralyxa::ResponseBuilder)
             directive = audio_player_class.as_hash(Ralyxa::ResponseEntities::Directives::Audio::Stream.new(url, token, offset_in_milliseconds, expected_previous_token), behaviour)
 
-            response_builder.build(build_options(directive, speech, card))
+            json = response_builder.build(build_options(directive, speech, card))
+            response = JSON.parse(json)
+
+            response[:sessionAttributes] = session_attributes if session_attributes
+            response.to_json
           end
 
           def play_later(url, token, speech: nil, card: nil, offset_in_milliseconds: 0, expected_previous_token: nil, behaviour: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play::REPLACE_ENQUEUED, audio_player_class: Ralyxa::ResponseEntities::Directives::AudioPlayer::Play, response_builder: Ralyxa::ResponseBuilder)
