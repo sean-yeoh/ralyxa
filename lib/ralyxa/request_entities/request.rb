@@ -45,6 +45,18 @@ module Ralyxa
         session_attributes[attribute_name]
       end
 
+      def system_attributes
+        @request['context']['System']
+      end
+
+      def supported_interfaces
+        if interfaces = system_attributes.dig('device', 'supportedInterfaces')
+          interfaces.keys
+        else
+          []
+        end
+      end
+
       private
 
       def intent_request?

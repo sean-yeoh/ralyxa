@@ -35,6 +35,10 @@ module Ralyxa
       Ralyxa::ResponseEntities::Directives::AlexaPresentationLanguage
     end
 
+    def supports_apl?
+      request.supported_interfaces.include?('Alexa.Presentation.APL')
+    end
+
     def link_account_card(card_class = Ralyxa::ResponseEntities::Card)
       card_class.link_account
     end
