@@ -31,6 +31,10 @@ module Ralyxa
       Ralyxa::ResponseEntities::Directives::AudioPlayer
     end
 
+    def alexa_presentation_language
+      Ralyxa::ResponseEntities::Directives::AlexaPresentationLanguage
+    end
+
     def link_account_card(card_class = Ralyxa::ResponseEntities::Card)
       card_class.link_account
     end
