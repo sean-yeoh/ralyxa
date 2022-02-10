@@ -57,6 +57,10 @@ module Ralyxa
         end
       end
 
+      def apl_touch_event_arguments
+        @request['request']['arguments']
+      end
+
       private
 
       def intent_request?
