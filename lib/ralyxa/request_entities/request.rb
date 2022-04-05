@@ -8,6 +8,7 @@ module Ralyxa
     class Request
       extend Forwardable
       INTENT_REQUEST_TYPE = 'IntentRequest'.freeze
+      CAN_FULFILL_INTENT_REQUEST_TYPE = 'CanFulfillIntentRequest'.freeze
 
       def_delegator :@user, :id, :user_id
       def_delegator :@user, :access_token, :user_access_token
@@ -25,8 +26,11 @@ module Ralyxa
       end
 
       def intent_name
-        return @request['request']['type'] unless intent_request?
-        @request['request']['intent']['name']
+        if intent_request? || can_fulfill_intent_request?
+          @request['request']['intent']['name']
+        else
+          @request['request']['type']
+        end
       end
 
       def slot_value(slot_name)
@@ -65,6 +69,10 @@ module Ralyxa
 
       def intent_request?
         @request['request']['type'] == INTENT_REQUEST_TYPE
+      end
+
+      def can_fulfill_intent_request?
+        @request['request']['type'] == CAN_FULFILL_INTENT_REQUEST_TYPE
       end
 
       def validate_request(request)
