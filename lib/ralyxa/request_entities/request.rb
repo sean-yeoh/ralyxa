@@ -1,5 +1,6 @@
 require 'json'
 require 'forwardable'
+require 'base64'
 require 'alexa_verifier'
 require_relative './user'
 

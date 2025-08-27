@@ -16,7 +16,7 @@ RSpec.describe Ralyxa::Handler do
       it 'provides a more convenient interface for constructing responses in intent declarations' do
         response_builder = double(:"Ralyxa::ResponseBuilder")
 
-        expect(response_builder).to receive(:build).with(response_text: "Hello World")
+        expect(response_builder).to receive(:build).with({ response_text: "Hello World" })
 
         handler.send(:respond, 'Hello World', {}, response_builder)
       end
@@ -31,7 +31,7 @@ RSpec.describe Ralyxa::Handler do
     describe '#tell' do
       it 'delegates to respond, and ends the session' do
         response_text = "Hello World"
-        expect(handler).to receive(:respond).with(response_text, end_session: true)
+        expect(handler).to receive(:respond).with(response_text, { end_session: true })
 
         handler.send(:tell, "Hello World")
       end

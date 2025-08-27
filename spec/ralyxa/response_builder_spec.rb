@@ -40,7 +40,7 @@ RSpec.describe Ralyxa::ResponseBuilder do
 
     context 'without a response_text value' do
       it 'returns an empty hash' do
-        expect(response_class).to receive(:as_hash).with({})
+        expect(response_class).to receive(:as_hash).with(no_args)
 
         Ralyxa::ResponseBuilder.build({}, response_class, output_speech_class)
       end

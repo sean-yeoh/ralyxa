@@ -1,4 +1,6 @@
 require 'simplecov'
+require 'debug'
+
 SimpleCov.start do
   add_filter %r{^/spec/}
 end

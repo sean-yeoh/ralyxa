@@ -13,7 +13,7 @@ RSpec.describe Ralyxa::ResponseEntities::Response do
           }
       }
 
-      custom_response = described_class.as_hash({})
+      custom_response = described_class.as_hash
 
       expect(custom_response).to eq expected_response
     end

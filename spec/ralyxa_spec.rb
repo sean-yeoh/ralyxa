@@ -37,7 +37,7 @@ RSpec.describe Ralyxa do
     end
 
     it 'raises the expected method missing error for a genuinely missing method' do
-      expect{ Ralyxa.foo }.to raise_error(NoMethodError, 'undefined method `foo\' for Ralyxa:Module')
+      expect{ Ralyxa.foo }.to raise_error(NoMethodError, 'undefined method \'foo\' for module Ralyxa')
     end
   end
 
